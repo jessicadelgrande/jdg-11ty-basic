@@ -290,12 +290,12 @@
 		}
 
 		&:hover {
-			border: 1px solid var(--grey);
+			border: 1px solid black;
 		}
 	}
 
 	i {
-		color: var(--grey);
+		color: black;
 		font-size: 1.4rem;
 	}
 }
