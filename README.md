@@ -1,1 +1,1 @@
-# Page header
+Bare bones Eleventy site.
