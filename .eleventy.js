@@ -1,12 +1,13 @@
 module.exports = function (eleventyConfig) {
 	// Output directory: _site
 
-	// Copy the `css` directory to the output
-	eleventyConfig.addPassthroughCopy("css");
+	// Copy the `css` directory to the output _site folder
+	eleventyConfig.addPassthroughCopy("sass");
 
 	// Watch the `css` directory for changes
-	eleventyConfig.addWatchTarget("css");
+	eleventyConfig.addWatchTarget("sass");
 
-	// Copy fonts to the build output folder
-	eleventyConfig.addPassthroughCopy("css/fonts");
+	eleventyConfig.setBrowserSyncConfig({
+		files: "./_site/css/**/*.css",
+	});
 };

@@ -1,0 +1,298 @@
+:root {
+	--blue-bubble-background: #248bf5;
+	--dots-grey-1: #989898;
+	--dots-grey-2: #a6a6a6;
+	--dots-grey-3: #c0c0c0;
+	--grey-bubble-background: #e5e5ea;
+}
+
+@keyframes appear {
+	from,
+	20%,
+	to {
+		animation-timing-function: cubic-bezier(0.215, 0.61, 1);
+	}
+
+	0% {
+		opacity: 0;
+		transform: scale3d(0.3, 0.3, 0.3);
+	}
+
+	20% {
+		transform: scale3d(1.01, 1.01, 1.01);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale3d(1, 1, 1);
+	}
+}
+
+@keyframes disappear {
+	0% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes lift {
+	0% {
+		transform: translateY(0);
+	}
+
+	100% {
+		transform: translateY(-52px);
+	}
+}
+
+@keyframes lift-two-lines {
+	0% {
+		transform: translateY(-52px);
+	}
+
+	100% {
+		transform: translateY(-104px);
+	}
+}
+
+@keyframes dot-one {
+	0% {
+		background: var(--dots-grey-1);
+	}
+	33% {
+		background: var(--dots-grey-2);
+	}
+	66% {
+		background: var(--dots-grey-3);
+	}
+	100% {
+		background: var(--dots-grey-2);
+	}
+}
+
+@keyframes dot-two {
+	0% {
+		background: var(--dots-grey-3);
+	}
+	33% {
+		background: var(--dots-grey-1);
+	}
+	66% {
+		background: var(--dots-grey-2);
+	}
+	100% {
+		background: var(--dots-grey-3);
+	}
+}
+
+@keyframes dot-three {
+	0% {
+		background: var(--dots-grey-2);
+	}
+	33% {
+		background: var(--dots-grey-3);
+	}
+	66% {
+		background: var(--dots-grey-1);
+	}
+	100% {
+		background: var(--dots-grey-2);
+	}
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	height: calc(90vh - 48px);
+	justify-content: flex-end;
+	margin: 24px auto;
+	max-width: 400px;
+	width: 94%;
+}
+
+.message {
+	position: relative;
+}
+
+.bubble {
+	background: var(--grey-bubble-background);
+	border-radius: 40px;
+	bottom: 0;
+	display: inline-block;
+	font-family: Helvetica, sans-serif;
+	font-size: 24px;
+	height: 36px;
+	margin: 4px;
+	padding: 8px 20px 0;
+	position: absolute;
+}
+
+.bubble-blue {
+	@extend .bubble;
+	animation: appear 500ms 1s forwards, lift 500ms 3900ms forwards,
+		lift-two-lines 500ms 8600ms forwards;
+	background: var(--blue-bubble-background);
+	color: #fff;
+	opacity: 0;
+	right: 16px;
+
+	&::before,
+	&::after {
+		bottom: 0;
+		content: "";
+		height: 18px;
+		position: absolute;
+	}
+
+	&::before {
+		border-bottom-left-radius: 14px 13px;
+		border-right: 16px solid var(--blue-bubble-background);
+		right: -7px;
+		transform: translate(0, 0);
+	}
+
+	&::after {
+		background-color: #fff;
+		border-bottom-left-radius: 8px;
+		right: -40px;
+		transform: translate(-30px, -2px);
+		width: 10px;
+	}
+}
+
+.dot {
+	background: var(--dots-grey-3);
+	border-radius: 50%;
+	display: inline-block;
+	height: 10px;
+	margin-bottom: 2px;
+	margin-right: -2px;
+	width: 10px;
+}
+
+.dot-one {
+	@extend .dot;
+	animation: dot-one 1s infinite;
+}
+
+.dot-two {
+	@extend .dot;
+	animation: dot-two 1s infinite;
+}
+
+.dot-three {
+	@extend .dot;
+	animation: dot-three 1s infinite;
+}
+
+.bubble-typing {
+	@extend .bubble;
+	opacity: 0;
+	position: relative;
+
+	&::before,
+	&::after {
+		background: var(--grey-bubble-background);
+		border-radius: 50%;
+		content: "";
+		position: absolute;
+	}
+
+	&::before {
+		bottom: -4px;
+		height: 8px;
+		left: -12px;
+		width: 8px;
+	}
+
+	&::after {
+		bottom: 0;
+		height: 18px;
+		left: -5px;
+		width: 18px;
+	}
+}
+
+.bubble-grey {
+	@extend .bubble;
+	opacity: 0;
+	position: relative;
+
+	&::before,
+	&::after {
+		bottom: 0;
+		content: "";
+		height: 18px;
+		position: absolute;
+	}
+
+	&::before {
+		border-bottom-right-radius: 14px 13px;
+		border-left: 16px solid var(--grey-bubble-background);
+		left: -7px;
+		transform: translate(0, 0);
+	}
+
+	&::after {
+		background-color: #fff;
+		border-bottom-right-radius: 8px;
+		left: 20px;
+		transform: translate(-30px, -2px);
+		width: 10px;
+	}
+}
+
+.bubble-first {
+	@extend .bubble-typing;
+	animation: appear 1s 4s forwards normal,
+		disappear 500ms 8200ms forwards normal;
+	position: absolute;
+}
+
+.bubble-second {
+	@extend .bubble-grey;
+	animation: appear 1s 8200ms forwards, lift 500ms 8600ms forwards;
+	position: absolute;
+}
+
+.bubble-third {
+	@extend .bubble-typing;
+	animation: appear 1s 8600ms forwards, disappear 500ms 9s forwards normal;
+	position: absolute;
+}
+
+.bubble-fourth {
+	@extend .bubble-grey;
+	animation: appear 1s 9s forwards;
+	position: absolute;
+}
+
+.socials {
+	a {
+		align-items: center;
+		border: 1px solid transparent;
+		border-radius: 50%;
+		display: inline-flex;
+		justify-content: center;
+		height: 40px;
+		margin: 8px;
+		text-decoration: none;
+		width: 40px;
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		&:hover {
+			border: 1px solid black;
+		}
+	}
+
+	i {
+		color: black;
+		font-size: 1.4rem;
+	}
+}
